@@ -1,0 +1,29 @@
+# Server Configuration
+server:
+  port: 9494
+
+# Kafka Configuration
+# NOTE: Deserializer config is in KafkaAvroConsumerConfig.java (recommended approach)
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+# Schema Registry Configuration
+schema:
+  registry:
+    url: http://localhost:8081
+
+# Application Topics
+app:
+  kafka:
+    topics:
+      employee: employee-avro-topic
+    consumer:
+      group-id: avro-consumer-group
+
+# Logging
+logging:
+  level:
+    org.apache.kafka: INFO
+    io.confluent: INFO
+    com.kafkaPrac.kafka: DEBUG
