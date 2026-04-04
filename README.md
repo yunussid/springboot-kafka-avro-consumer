@@ -47,6 +47,22 @@ This is the **right half** of the pipeline:
 
 > For the full explanation with diagrams, see the [Producer README](https://github.com/yunussid/springboot-kafka-avro-producer).
 
+### What is KRaft? (Quick Version)
+
+Older Kafka setups needed a separate system called **Zookeeper** to manage metadata (which broker is alive, who leads each partition). Starting with Kafka 3.x, Kafka handles this itself using a built-in protocol called **KRaft (Kafka Raft)**. Zookeeper was **fully removed in Kafka 4.0**.
+
+```
+Old way:  Zookeeper + Kafka + Schema Registry  (3 systems)
+New way:  Kafka (KRaft) + Schema Registry       (2 systems -- what this project uses)
+```
+
+**This does not affect your consumer code at all.** Your app connects to `localhost:9092` regardless of whether the broker uses KRaft or Zookeeper. But it is important to know because:
+- Interview question -- "What is KRaft?"
+- If you see old tutorials with Zookeeper, they are outdated
+- The `docker-compose.yml` (in the Producer project) configures `KAFKA_PROCESS_ROLES: broker,controller` -- that is the KRaft setting
+
+> For the full KRaft deep-dive with diagrams and every docker-compose setting explained, see the [Producer README](https://github.com/yunussid/springboot-kafka-avro-producer).
+
 ---
 
 ## Understanding the 3 Ports (Same Concept as Producer)
